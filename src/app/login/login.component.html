@@ -1,0 +1,14 @@
+<div class="div_login">
+  <img class="div_img_logo" src="../../assets/logo.png" alt="logo">
+</div>
+<div>
+  <label>手机号：<input type="text" [(ngModel)]="phoneNum" placeholder="请输入手机号"></label>
+  <br>
+  <label>验证码：<input type="text" [(ngModel)]="code" placeholder="请输入右侧验证码"></label>
+  <br>
+  <label>密码：<input type="text" [(ngModel)]="password" placeholder="请输入密码"></label>
+  <P>没有账号？</P><a href="">立即注册</a>
+</div>
+<div>
+  <button (click)="loginBtnClick()">登录</button>
+</div>
