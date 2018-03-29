@@ -12,13 +12,12 @@ export class HeroService {
 
   constructor(private messagesService: MessagesService) { }
 
-  getHero(): Hero[] {
-    return HEROES;
-  }
-
   getHeroes(): Observable<Hero[]> {
     this.messagesService.add('HeroService: fetched heroes');
     return of(HEROES); // of(HEROES) 会返回一个 Observable<Hero[]>，它会发出单个值，这个值就是这些模拟英雄的数组。
   }
-
+  getHero(id: number): Observable<Hero> {
+    this.messagesService.add(`HeroService: fetched hero id = ${id}`); // 反引号 ( ` ) 用于定义 JavaScript 的 模板字符串字面量，以便嵌入 id。
+    return of(HEROES.find(hero => hero.id === id));
+  }
 }

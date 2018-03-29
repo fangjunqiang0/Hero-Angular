@@ -2,10 +2,13 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HeroesComponent } from './heroes/heroes.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { HeroDetailComponent } from './hero-detail/hero-detail.component';
 
 export const routers: Routes = [
+  {path: '', redirectTo: '/dashboard', pathMatch: 'full'}, // 默认路由
   {path: 'heroes', component: HeroesComponent},
-  {path: 'dashboard', component: DashboardComponent}
+  {path: 'dashboard', component: DashboardComponent},
+  {path: 'detail/:id', component: HeroDetailComponent} // path 中的冒号（:）表示 :id 是一个占位符，它表示某个特定英雄的 id。
 ];
 
 @NgModule({
