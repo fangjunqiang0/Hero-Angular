@@ -9,6 +9,7 @@ import { HeroDetailComponent } from './hero-detail/hero-detail.component';
 import { HeroService } from './hero.service';
 import { MessagesComponent } from './messages/messages.component';
 import { MessagesService } from './messages.service';
+import { AppRoutingModule } from './app-routing/app-routing.module';
 
 
 
@@ -23,7 +24,8 @@ import { MessagesService } from './messages.service';
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule
   ],
   providers: [HeroService, MessagesService],
   bootstrap: [AppComponent]
