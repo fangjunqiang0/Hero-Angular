@@ -7,6 +7,8 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { HeroDetailComponent } from './hero-detail/hero-detail.component';
 import { HeroService } from './hero.service';
+import { MessagesComponent } from './messages/messages.component';
+import { MessagesService } from './messages.service';
 
 
 
@@ -16,13 +18,14 @@ import { HeroService } from './hero.service';
     HeroesComponent,
     LoginComponent,
     HomeComponent,
-    HeroDetailComponent
+    HeroDetailComponent,
+    MessagesComponent
   ],
   imports: [
     BrowserModule,
     FormsModule
   ],
-  providers: [HeroService],
+  providers: [HeroService, MessagesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
