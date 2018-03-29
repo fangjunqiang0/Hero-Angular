@@ -4,13 +4,11 @@
    {{ title }}!
   </h1>
 </div>
-<!-- <nav> -->
+<nav>
   <!-- routerLink 是 RouterLink 指令的选择器，它会把用户的点击转换为路由器的导航操作。 它是 RouterModule 中公开的另一个指令。 -->
-  <!-- <a routerLink="/heroes">Heroes</a> 
-</nav> -->
+  <a routerLink="/heroes">Heroes</a> 
+</nav>
 <div>
-  <!-- <app-heroes></app-heroes> -->
   <router-outlet name="heroes"></router-outlet>
   <app-messages></app-messages>
-  <!-- <app-login></app-login> -->
 </div>
