@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { HeroesComponent } from './heroes/heroes.component';
 
 export const routers: Routes = [
-  {path: 'heroes', component: HeroesComponent}
+  {path: '', component: HeroesComponent, outlet: 'heroes'}
 ];
 
 @NgModule({
