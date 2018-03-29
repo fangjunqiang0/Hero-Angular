@@ -18,7 +18,6 @@ export class HeroService {
 
   getHeroes(): Observable<Hero[]> {
     this.messagesService.add('HeroService: fetched heroes');
-    this.messagesService.add('信息1');
     return of(HEROES); // of(HEROES) 会返回一个 Observable<Hero[]>，它会发出单个值，这个值就是这些模拟英雄的数组。
   }
 
