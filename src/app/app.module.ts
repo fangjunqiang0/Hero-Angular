@@ -12,6 +12,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api'; // 模拟出的远程数据服务器通讯。
 import { InMemoryDataService } from './in-memory-data.service';
 import { HttpClientModule } from '@angular/common/http';
+import { HeroSearchComponent } from './hero-search/hero-search.component';
 
 
 
@@ -23,6 +24,7 @@ import { HttpClientModule } from '@angular/common/http';
     HeroesComponent,
     HeroDetailComponent,
     MessagesComponent,
+    HeroSearchComponent,
     DashboardComponent,
   ],
   imports: [

@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Hero } from './hero';
 import { HEROES } from './mock-heroes';
-import { Observable, of} from 'rxjs';
+import { Observable } from 'rxjs/observable';
+import { of } from 'rxjs/observable/of';
 import { MessagesService } from './messages.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 
 
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 // @Injectable() 装饰器告诉 Angular 这个服务本身可能拥有被注入的依赖。
 // 目前它还没有依赖，但是很快就会有了。 无论它会不会有，总是给服务加上这个装饰器都是一种好的做法。
@@ -39,6 +43,8 @@ export class HeroService {
 
     // catchError() 操作符会拦截失败的 Observable。 它把错误对象传给错误处理器，错误处理器会处理这个错误。
     // 下面的 handleError() 方法会报告这个错误，并返回一个无害的结果（安全值），以便应用能正常工作。
+
+    /** 获取英雄列表 */
   getHeroes(): Observable<Hero[]> {
     return this.http.get<Hero[]>(this.heroesUrl)
     .pipe(
@@ -48,7 +54,7 @@ export class HeroService {
   }
 
 
-
+  /** 通过id获取单个英雄 */
   getHero(id: number): Observable<Hero> {
     const getHeroUrl = `${this.heroesUrl}/${id}`;
     return this.http.get<Hero>(getHeroUrl)
@@ -58,7 +64,49 @@ export class HeroService {
       );
   }
 
-  /** Log a HeroService message with the MessageService */
+  /** 更新英雄 */
+  updateHero(hero: Hero): Observable<any> {
+    return this.http.put(this.heroesUrl, hero, httpOptions)
+    .pipe(
+      tap(_ => this.log(`update hero id = ${hero.id}`)),
+      catchError(this.handleError<any>('updateHero'))
+    );
+  }
+
+  /** 添加英雄 */
+  addHero(hero: Hero): Observable<Hero> {
+    return this.http.post(this.heroesUrl, hero, httpOptions)
+    .pipe(
+      tap((h: Hero) => this.log(`added hero w/ id = ${h.id}`)),
+      catchError(this.handleError<Hero>('addHero'))
+    );
+  }
+
+  /** 删除英雄 */
+  deleteHero(hero: Hero | number): Observable<Hero> {
+    const id = typeof hero === 'number' ? hero : hero.id;
+    const url = `${this.heroesUrl}/${id}`;
+
+    return this.http.delete<Hero>(url, httpOptions)
+    .pipe(
+      tap( _ => this.log(`delete hero id = ${id}`)),
+      catchError(this.handleError<Hero>('deleteHero'))
+    );
+    }
+
+    /** 搜索英雄 */
+    searchHeroes(str: string): Observable<Hero[]> {
+      if (!str.trim()) {
+        return of([]);
+      }
+      const url = `${this.heroesUrl}/?name=${str}`;
+      return this.http.get<Hero[]>(url)
+      .pipe(
+        tap( _ => this.log(`found heroes matching "${str}`)),
+        catchError(this.handleError<Hero[]>('searchHeroes'))
+      );
+    }
+  /** 打印 heroService 信息 */
 private log(message: string) {
   this.messagesService.add('HeroService: ' + message);
 }
